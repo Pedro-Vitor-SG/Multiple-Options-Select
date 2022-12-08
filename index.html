@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+      integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <title>Document</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: sans-serif;
+      }
+      body {
+        background-color: gray;
+      }
+      .container {
+        position: relative;
+        max-width: 320px;
+        width: 100%;
+        margin: 80px auto 30px;
+      }
+      .select-btn {
+        display: flex;
+        height: 50px;
+        align-items: center;
+        justify-content: space-between;
+        padding: 16px;
+        border-radius: 8px;
+        cursor: pointer;
+        background-color: white;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+      }
+      .select-btn .btn-text {
+        font-size: 17px;
+        font-weight: 400;
+        color: #333;
+      }
+      .select-btn .arrow-dwn {
+        height: 21px;
+        width: 21px;
+        background: #777;
+        border-radius: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        transition: 0.3s;
+      }
+      .select-btn.open .arrow-dwn {
+        transform: rotate(-180deg);
+      }
+
+      .list-items {
+        position: relative;
+        margin-top: 15px;
+        border-radius: 8px;
+        padding: 16px;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+        background-color: #fff;
+
+        display: none;
+      }
+      .select-btn.open ~ .list-items {
+        display: block;
+      }
+      .list-items .item {
+        display: flex;
+        align-items: center;
+        list-style: none;
+        height: 50px;
+        cursor: pointer;
+        transition: 0.3s;
+        padding: 0 15px;
+        border-radius: 8px;
+        margin-bottom: 5px;
+      }
+      .list-items .item:hover {
+        background-color: #777;
+      }
+      .item .item-text {
+        font-size: 16px;
+        font-weight: 400;
+        color: #333;
+      }
+      .item .checkbox {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 16px;
+        width: 16px;
+        border: 1.5px solid #c0c0c0;
+        margin-right: 15px;
+        border-radius: 4px;
+        transition: all 0.3s ease-in-out;
+      }
+      .item.checked .checkbox {
+        background-color: crimson;
+        border-color: #fff;
+      }
+      .item.checked {
+        background-color: red;
+      }
+      .checkbox .check-icon {
+        color: yellow;
+        font-size: 11px;
+        transform: scale(0);
+        transition: all 0.3s ease-in-out;
+      }
+      .item.checked .check-icon {
+        transform: scale(1);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="select-btn">
+        <span class="btn-text"> Select Language</span>
+        <span class="arrow-dwn">
+          <i class="fa-solid fa-arrow-down"></i>
+        </span>
+      </div>
+      <ul class="list-items">
+        <li class="item">
+          <span class="checkbox">
+            <i class="fa-solid fa-check check-icon"></i>
+          </span>
+          <span class="item-text">Teste 1</span>
+        </li>
+        <li class="item">
+          <span class="checkbox">
+            <i class="fa-solid fa-check check-icon"></i>
+          </span>
+          <span class="item-text">Teste 2</span>
+        </li>
+        <li class="item">
+          <span class="checkbox">
+            <i class="fa-solid fa-check check-icon"></i>
+          </span>
+          <span class="item-text">Teste 3</span>
+        </li>
+        <li class="item">
+          <span class="checkbox">
+            <i class="fa-solid fa-check check-icon"></i>
+          </span>
+          <span class="item-text">Teste 4</span>
+        </li>
+        <li class="item">
+          <span class="checkbox">
+            <i class="fa-solid fa-check check-icon"></i>
+          </span>
+          <span class="item-text">Teste 5</span>
+        </li>
+        <li class="item">
+          <span class="checkbox">
+            <i class="fa-solid fa-check check-icon"></i>
+          </span>
+          <span class="item-text">Teste 6</span>
+        </li>
+        <li class="item">
+          <span class="checkbox">
+            <i class="fa-solid fa-check check-icon"></i>
+          </span>
+          <span class="item-text">Teste 7</span>
+        </li>
+      </ul>
+    </div>
+
+    <script>
+      const select = document.querySelector(".select-btn");
+      const items = document.querySelectorAll(".item");
+
+      select.addEventListener("click", () => {
+        select.classList.toggle("open");
+      });
+      console.log(select, items);
+
+      items.forEach((item) => {
+        item.addEventListener("click", () => {
+          item.classList.toggle("checked");
+
+          let checked = document.querySelectorAll(".checked")
+          let btnText = document.querySelector(".btn-text")
+
+          console.log(checked.length)
+
+          if(checked && checked.length > 0) {
+            console.log("valid")
+            btnText.innerText = `${checked.length} Selected`
+          }else {
+            console.log("invalid")
+            btnText.innerText = `Select Language`
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
